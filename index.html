@@ -1,0 +1,1005 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMAR | The Dark Knight of Networks & AI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Spider Web Canvas */
+        #spiderWeb {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Batman Logo Section */
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 20px;
+            position: relative;
+        }
+
+        .batman-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bat-symbol {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #1a1a1a;
+            clip-path: polygon(50% 0%, 60% 20%, 80% 20%, 85% 35%, 95% 40%, 
+                               90% 55%, 95% 70%, 80% 80%, 65% 95%, 50% 100%, 
+                               35% 95%, 20% 80%, 5% 70%, 10% 55%, 5% 40%, 
+                               15% 35%, 20% 20%, 40% 20%);
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.3);
+            animation: batGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes batGlow {
+            0% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.3);
+            }
+            100% { 
+                box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        .name-text {
+            position: absolute;
+            z-index: 2;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+            animation: nameFloat 3s ease-in-out infinite;
+            letter-spacing: 8px;
+        }
+
+        @keyframes nameFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Batarang Decoration */
+        .batarang {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #ffd700;
+            clip-path: polygon(50% 0%, 70% 30%, 90% 50%, 70% 70%, 50% 100%, 
+                               30% 70%, 10% 50%, 30% 30%);
+            animation: batarangFly 4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        .batarang.left {
+            left: -80px;
+            animation-delay: 0s;
+        }
+
+        .batarang.right {
+            right: -80px;
+            animation-delay: 2s;
+        }
+
+        @keyframes batarangFly {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(180deg) translateY(-20px); }
+            50% { transform: rotate(360deg) translateY(0); }
+            75% { transform: rotate(540deg) translateY(20px); }
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            font-family: 'Orbitron', sans-serif;
+            color: #c0c0c0;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            border: 2px solid #ffd700;
+            background: rgba(0, 0, 0, 0.8);
+            clip-path: polygon(10% 0%, 90% 0%, 100% 30%, 95% 100%, 5% 100%, 0% 30%);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: #ffd700;
+            color: #000000;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            transform: translateY(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+            letter-spacing: 5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #c0c0c0;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            max-width: 700px;
+            margin: 20px auto;
+            line-height: 1.8;
+            animation: fadeInUp 2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #ffd700;
+            text-align: center;
+            margin: 60px 0 40px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 150px;
+            height: 3px;
+            background: #ffd700;
+            margin: 15px auto;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Certifications Grid */
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .cert-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ffd700;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0% 90%, 0% 10%);
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.3);
+        }
+
+        .cert-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card .cert-badge {
+            display: inline-block;
+            background: #ffd700;
+            color: #000;
+            padding: 8px 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin: 10px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Skills Progress Bars */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 30px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #ffd700;
+            letter-spacing: 2px;
+        }
+
+        .skill-percentage {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4a);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: width 2s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Network Experience Grid */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .exp-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            clip-path: polygon(3% 0%, 97% 0%, 100% 8%, 100% 92%, 97% 100%, 3% 100%, 0% 92%, 0% 8%);
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .exp-card:hover {
+            border-color: #ffd700;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .exp-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .exp-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .exp-card p {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* AI Section */
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .ai-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #ffd700;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .ai-card:hover {
+            background: rgba(20, 20, 20, 0.95);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        .ai-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .ai-card h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffd700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            padding: 18px 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000000;
+            background: #ffd700;
+            text-decoration: none;
+            letter-spacing: 2px;
+            clip-path: polygon(5% 0%, 95% 0%, 100% 30%, 95% 100%, 5% 100%, 0% 30%);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+
+        .cta-button:hover {
+            background: #ffed4a;
+            transform: scale(1.1);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 20px 60px rgba(255, 215, 0, 0.7); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 2px solid #ffd700;
+            margin-top: 60px;
+        }
+
+        .footer-text {
+            font-family: 'Orbitron', sans-serif;
+            color: #ffd700;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+
+        /* Smoke Effect */
+        .smoke {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Bat Signal */
+        .bat-signal {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 300px;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.15), transparent);
+            pointer-events: none;
+            z-index: 0;
+            animation: signalPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes signalPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .name-text {
+                font-size: 2.5rem;
+            }
+            
+            .bat-symbol {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .nav {
+                gap: 15px;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+
+            .batarang {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spider Web Canvas -->
+    <canvas id="spiderWeb"></canvas>
+
+    <!-- Bat Signal -->
+    <div class="bat-signal"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="batman-container">
+                <div class="bat-symbol"></div>
+                <span class="name-text">OMAR</span>
+                <div class="batarang left"></div>
+                <div class="batarang right"></div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#certs" class="nav-link">Certifications</a>
+            <a href="#network" class="nav-link">Network</a>
+            <a href="#ai" class="nav-link">AI Skills</a>
+            <a href="#" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>THE DARK KNIGHT OF NETWORKS</h1>
+            <div class="subtitle">OMAR | CCNA • MCSA • AI SPECIALIST</div>
+            <p>
+                Mastering the digital infrastructure like Batman masters Gotham's shadows.
+                From network architecture to artificial intelligence, I deploy cutting-edge solutions
+                that transform chaos into order. The network is my city, and I am its silent guardian.
+            </p>
+            <a href="#" class="cta-button">ACTIVATE BAT-SIGNAL</a>
+        </section>
+
+        <!-- Certifications Section -->
+        <h2 class="section-title" id="certs">🏆 CERTIFICATIONS</h2>
+        <section class="certifications">
+            <div class="cert-card">
+                <div class="cert-icon">🔧</div>
+                <h3>CCNA</h3>
+                <div class="cert-badge">CISCO CERTIFIED</div>
+                <p>Cisco Certified Network Associate - Routing & Switching. Expert in network fundamentals, IP connectivity, and infrastructure management.</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">💻</div>
+                <h3>MCSA</h3>
+                <div class="cert-badge">MICROSOFT CERTIFIED</div>
+                <p>Microsoft Certified Solutions Associate. Advanced expertise in Windows Server, Active Directory, and enterprise infrastructure solutions.</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🤖</div>
+                <h3>AI Specialist</h3>
+                <div class="cert-badge">AI & ML EXPERT</div>
+                <p>Specialized in Artificial Intelligence, Machine Learning, and Deep Learning technologies for next-gen solutions.</p>
+            </div>
+        </section>
+
+        <!-- Network Experience Section -->
+        <h2 class="section-title" id="network">🌐 NETWORK EXPERIENCE</h2>
+        <section class="experience-grid">
+            <div class="exp-card">
+                <div class="exp-icon">🛡️</div>
+                <h4>Network Security</h4>
+                <p>Firewall configuration, intrusion detection, and security protocol implementation</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon">🔀</div>
+                <h4>Routing & Switching</h4>
+                <p>Advanced routing protocols (OSPF, EIGRP, BGP) and enterprise switching solutions</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon">🏗️</div>
+                <h4>Infrastructure Design</h4>
+                <p>Designing scalable and resilient network architectures for enterprise environments</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon">☁️</div>
+                <h4>Cloud Networking</h4>
+                <p>Hybrid cloud solutions, VPN configurations, and cloud network optimization</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon">📡</div>
+                <h4>Wireless Networks</h4>
+                <p>Enterprise Wi-Fi deployment, wireless security, and RF optimization</p>
+            </div>
+            <div class="exp-card">
+                <div class="exp-icon">🖥️</div>
+                <h4>Server Administration</h4>
+                <p>Windows Server, Linux administration, Active Directory, and Group Policy management</p>
+            </div>
+        </section>
+
+        <!-- Technical Skills with Progress Bars -->
+        <h2 class="section-title">⚡ TECHNICAL SKILLS</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name">NETWORK ROUTING (CCNA)</span>
+                    <span class="skill-percentage">95%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" data-width="95%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name">WINDOWS SERVER (MCSA)</span>
+                    <span class="skill-percentage">90%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" data-width="90%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name">NETWORK SECURITY</span>
+                    <span class="skill-percentage">50%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" data-width="50%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name">ACTIVE DIRECTORY</span>
+                    <span class="skill-percentage">92%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" data-width="92%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span class="skill-name">CLOUD INFRASTRUCTURE</span>
+                    <span class="skill-percentage">85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%" data-width="85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Skills Section -->
+        <h2 class="section-title" id="ai">🤖 ARTIFICIAL INTELLIGENCE</h2>
+        <section class="ai-grid">
+            <div class="ai-card">
+                <div class="ai-icon">🧠</div>
+                <h4>Machine Learning</h4>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">🔬</div>
+                <h4>Deep Learning</h4>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">💬</div>
+                <h4>NLP</h4>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">👁️</div>
+                <h4>Computer Vision</h4>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">📊</div>
+                <h4>Data Analytics</h4>
+            </div>
+            <div class="ai-card">
+                <div class="ai-icon">🔮</div>
+                <h4>Predictive Models</h4>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-text">OMAR</div>
+            <p style="color: #a0a0a0; margin-top: 10px;">
+                © 2024 The Dark Knight Chronicles | CCNA • MCSA • AI Specialist 🦇
+            </p>
+            <p style="color: #ffd700; margin-top: 5px; font-size: 0.9rem;">
+                "In the network of shadows, I am the light that guides."
+            </p>
+        </footer>
+    </div>
+
+    <!-- Smoke Effect -->
+    <div class="smoke"></div>
+
+    <script>
+        // Spider Web Canvas
+        const canvas = document.getElementById('spiderWeb');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Spider Web Variables
+        let webLines = [];
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const maxRadius = Math.min(canvas.width, canvas.height) * 0.6;
+
+        // Create Spider Web
+        function createSpiderWeb() {
+            webLines = [];
+            
+            // Radial lines (spokes)
+            const spokes = 16;
+            for (let i = 0; i < spokes; i++) {
+                const angle = (i / spokes) * Math.PI * 2;
+                webLines.push({
+                    type: 'spoke',
+                    angle: angle,
+                    opacity: 0.3 + Math.random() * 0.2
+                });
+            }
+
+            // Spiral rings
+            const rings = 8;
+            for (let i = 0; i < rings; i++) {
+                const radius = (maxRadius / rings) * (i + 1);
+                webLines.push({
+                    type: 'ring',
+                    radius: radius,
+                    opacity: 0.2 + (i / rings) * 0.3
+                });
+            }
+        }
+
+        createSpiderWeb();
+
+        // Mouse interaction
+        let mouseX = centerX;
+        let mouseY = centerY;
+        let spiderX = centerX;
+        let spiderY = centerY + 100;
+
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Draw Spider Web
+        function drawSpiderWeb() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw rings
+            webLines.forEach(line => {
+                if (line.type === 'ring') {
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, line.radius, 0, Math.PI * 2);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${line.opacity})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            });
+
+            // Draw spokes
+            webLines.forEach(line => {
+                if (line.type === 'spoke') {
+                    const endX = centerX + Math.cos(line.angle) * maxRadius;
+                    const endY = centerY + Math.sin(line.angle) * maxRadius;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.lineTo(endX, endY);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${line.opacity})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+            });
+
+            // Draw connection lines (web threads between spokes)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 0.5;
+            for (let r = 1; r <= 6; r++) {
+                const radius = (maxRadius / 6) * r;
+                const points = 32;
+                ctx.beginPath();
+                for (let i = 0; i <= points; i++) {
+                    const angle = (i / points) * Math.PI * 2;
+                    const x = centerX + Math.cos(angle) * radius;
+                    const y = centerY + Math.sin(angle) * radius;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            // Draw small spider
+            drawSpider(spiderX, spiderY);
+
+            // Draw web vibration near mouse
+            drawWebVibration(mouseX, mouseY);
+        }
+
+        function drawSpider(x, y) {
+            // Spider body
+            ctx.fillStyle = '#ffd700';
+            ctx.shadowColor = 'rgba(255, 215, 0, 0.8)';
+            ctx.shadowBlur = 10;
+            
+            // Body
+            ctx.beginPath();
+            ctx.ellipse(x, y, 8, 6, 0, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Head
+            ctx.beginPath();
+            ctx.arc(x, y - 10, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Legs
+            ctx.strokeStyle = '#ffd700';
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 5;
+            
+            const legAngles = [45, 25, -25, -45];
+            legAngles.forEach(angle => {
+                const rad = angle * Math.PI / 180;
+                // Left legs
+                ctx.beginPath();
+                ctx.moveTo(x - 3, y - 3);
+                ctx.lineTo(x - 15 * Math.cos(rad), y - 15 * Math.sin(rad) - 3);
+                ctx.stroke();
+                
+                // Right legs
+                ctx.beginPath();
+                ctx.moveTo(x + 3, y - 3);
+                ctx.lineTo(x + 15 * Math.cos(rad), y + 15 * Math.sin(rad) - 3);
+                ctx.stroke();
+            });
+            
+            ctx.shadowBlur = 0;
+        }
+
+        function drawWebVibration(x, y) {
+            const dist = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+            if (dist < maxRadius) {
+                ctx.beginPath();
+                ctx.arc(x, y, 30, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(255, 215, 0, ${0.3 - dist / maxRadius * 0.3})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        // Animate Spider
+        function animateSpider() {
+            const dx = mouseX - spiderX;
+            const dy = mouseY - spiderY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist > 1) {
+                spiderX += dx * 0.02;
+                spiderY += dy * 0.02;
+                
+                // Keep spider within web
+                const distFromCenter = Math.sqrt((spiderX - centerX) ** 2 + (spiderY - centerY) ** 2);
+                if (distFromCenter > maxRadius - 20) {
+                    const angle = Math.atan2(spiderY - centerY, spiderX - centerX);
+                    spiderX = centerX + Math.cos(angle) * (maxRadius - 20);
+                    spiderY = centerY + Math.sin(angle) * (maxRadius - 20);
+                }
+            }
+        }
+
+        // Animate progress bars when they come into view
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const targetWidth = bar.getAttribute('data-width');
+                        bar.style.width = targetWidth;
+                        observer.unobserve(bar);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            progressBars.forEach(bar => {
+                observer.observe(bar);
+            });
+        }
+
+        // Animation loop
+        function animate() {
+            animateSpider();
+            drawSpiderWeb();
+            requestAnimationFrame(animate);
+        }
+
+        // Initialize everything
+        createSpiderWeb();
+        animate();
+        animateProgressBars();
+
+        // Recreate web on resize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createSpiderWeb();
+        });
+
+        // Navigation clicks
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else {
+                    e.preventDefault();
+                    const text = this.textContent;
+                    alert(`Navigating to ${text} section... 🦇`);
+                }
+            });
+        });
+
+        // CTA Button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🦇 The Bat-Signal has been activated! OMAR is deploying network solutions...');
+        });
+
+        console.log('🦇 OMAR - The Dark Knight of Networks has arrived!');
+        console.log('🔧 CCNA | 💻 MCSA | 🤖 AI Specialist');
+        console.log('💛 Protecting Gotham\'s digital infrastructure...');
+    </
