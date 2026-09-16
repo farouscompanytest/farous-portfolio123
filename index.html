@@ -44,7 +44,7 @@
     letter-spacing:-0.01em;
   }
   p{margin:0;}
-  .wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.25rem,4vw,3rem);}
+  .wrap{max-width:var(--max);margin:0 auto;padding-inline:clamp(1.5rem,5vw,3rem);}
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -147,21 +147,21 @@
     background-size:250% 100%;
     -webkit-background-clip:text; background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:heroShine 3.5s ease-in-out infinite;
-    text-shadow:0 2px 10px rgba(0,0,0,0.4);
+    animation:heroShine 6s ease-in-out infinite;
+    text-shadow:0 2px 10px rgba(0,0,0,0.35);
   }
   @keyframes heroShine{
     0%{background-position:220% 0;}
     100%{background-position:-120% 0;}
   }
   .hero-tags{
-    display:flex; justify-content:center; gap:0.9rem; margin-top:1.6rem; flex-wrap:wrap;
+    display:flex; justify-content:center; gap:0.7rem 0.9rem; margin-top:clamp(1.4rem,4vw,1.6rem); flex-wrap:wrap;
   }
   .hero-tag{
     border:1px solid rgba(255,255,255,0.35); color:#fff; font-size:0.82rem;
     padding:0.4rem 0.9rem; border-radius:999px; backdrop-filter:blur(4px); background:rgba(7,27,51,0.25);
   }
-  .hero-actions{display:flex; gap:1rem; justify-content:center; margin-top:2.2rem; flex-wrap:wrap;}
+  .hero-actions{display:flex; gap:1rem; justify-content:center; margin-top:clamp(1.8rem,5vw,2.2rem); flex-wrap:wrap;}
   .btn{
     display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 1.7rem;
     font-weight:700; font-size:0.95rem; border-radius:2px; border:1.5px solid transparent;
@@ -361,32 +361,58 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 980px){
     .nav-links{display:none;}
-    .nav-toggle{display:block;}
+    .nav-toggle{display:block; padding:0.75rem;}
     .brand-text .sub{display:none;}
-    .nav-cta{padding:0.55rem 0.9rem; font-size:0.8rem;}
+    .nav-cta{padding:0.6rem 1rem; font-size:0.82rem;}
     .hero{--seam-shift:19vw;}
+    .hero-content{width:min(560px, 90vw);}
     .capabilities{grid-template-columns:1fr;}
-    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .cap-panel{min-height:340px; border-bottom:1px solid rgba(232,199,102,0.16);}
+    .cap-panel:last-child{border-bottom:none;}
+    .stats-grid{grid-template-columns:repeat(2,1fr); gap:2rem 1.5rem;}
     .why-grid{grid-template-columns:repeat(2,1fr);}
+    .why-item{padding:2rem 1.5rem;}
     .why-item:nth-child(2n){border-right:none;}
-    .projects-grid{grid-template-columns:repeat(2,1fr);}
+    .projects-grid{grid-template-columns:repeat(2,1fr); gap:1.1rem;}
     .project-card.wide{grid-column:span 2;}
-    .contact-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr; gap:3rem;}
     .manifest thead{display:none;}
-    .manifest tbody td{display:block; padding:0.3rem 0;}
-    .manifest tbody tr{display:block; padding:1.2rem 0; border-bottom:1px solid var(--rule);}
-    .manifest tbody td:last-child{margin-top:0.5rem;}
+    .manifest tbody td{display:block; padding:0.2rem 0;}
+    .manifest tbody tr{display:block; padding:1.4rem 0; border-bottom:1px solid var(--rule);}
+    .manifest tbody td:last-child{margin-top:0.7rem;}
+    .manifest tbody td::before{
+      content:attr(data-label); display:block; font-size:0.72rem; font-weight:700;
+      letter-spacing:0.05em; text-transform:uppercase; color:var(--steel); margin-bottom:0.3rem;
+    }
+    .manifest tbody td.m-sector-cell::before{display:none;}
+    .form-card{padding:clamp(1.6rem,5vw,2rem);}
   }
   @media (max-width: 620px){
-    .stats-grid{grid-template-columns:1fr 1fr;}
+    .section{padding:clamp(3.5rem,10vw,5rem) 0;}
+    .stats-grid{grid-template-columns:1fr 1fr; gap:1.8rem 1.2rem;}
     .why-grid{grid-template-columns:1fr;}
-    .why-item{border-right:none;}
-    .projects-grid{grid-template-columns:1fr;}
+    .why-item{border-right:none; border-bottom:1px solid var(--rule);}
+    .why-item:last-child{border-bottom:none;}
+    .projects-grid{grid-template-columns:1fr; gap:1rem;}
     .project-card.wide{grid-column:span 1;}
+    .project-card{aspect-ratio:4/3.2;}
     .field-row{grid-template-columns:1fr;}
     .hero-labels{gap:0.8rem; bottom:0.9rem;}
     .hero-label.right{flex-direction:row;}
     .hero-label{font-size:0.68rem;}
+    .hero-actions .btn{width:100%; justify-content:center;}
+    .careers-modal{padding:1.75rem 1.4rem;}
+  }
+  @media (max-width: 480px){
+    .hero{--seam-shift:12vw;}
+    .hero-emblem{margin-bottom:1.2rem;}
+    .hero-sub{font-size:1.05rem; line-height:1.65;}
+    .stats-grid{grid-template-columns:1fr; gap:1.5rem;}
+    .stat{padding-left:1rem;}
+    .cap-panel{padding:2.4rem 1.5rem; min-height:auto;}
+    .contact::before, .contact::after{display:none;}
+    .footer-inner{text-align:center; justify-content:center;}
+    .footer-links{justify-content:center;}
   }
 </style>
 </head>
@@ -491,34 +517,34 @@
       </thead>
       <tbody>
         <tr>
-          <td class="m-service">Marine construction</td>
-          <td class="m-scope">Jetties, quays, breakwaters and coastal reinforcement built to withstand Red Sea marine conditions.</td>
-          <td><span class="m-sector marine">Marine</span></td>
+          <td class="m-service" data-label="Service">Marine construction</td>
+          <td class="m-scope" data-label="Scope">Jetties, quays, breakwaters and coastal reinforcement built to withstand Red Sea marine conditions.</td>
+          <td class="m-sector-cell"><span class="m-sector marine">Marine</span></td>
         </tr>
         <tr>
-          <td class="m-service">Dredging &amp; marine support</td>
-          <td class="m-scope">Coordination of dredging works, marine access and waterside logistics for port and resort clients.</td>
-          <td><span class="m-sector marine">Marine</span></td>
+          <td class="m-service" data-label="Service">Dredging &amp; marine support</td>
+          <td class="m-scope" data-label="Scope">Coordination of dredging works, marine access and waterside logistics for port and resort clients.</td>
+          <td class="m-sector-cell"><span class="m-sector marine">Marine</span></td>
         </tr>
         <tr>
-          <td class="m-service">General contracting</td>
-          <td class="m-scope">Civil works and building construction for residential, commercial and hospitality developments.</td>
-          <td><span class="m-sector land">Land</span></td>
+          <td class="m-service" data-label="Service">General contracting</td>
+          <td class="m-scope" data-label="Scope">Civil works and building construction for residential, commercial and hospitality developments.</td>
+          <td class="m-sector-cell"><span class="m-sector land">Land</span></td>
         </tr>
         <tr>
-          <td class="m-service">Fit-out &amp; finishing</td>
-          <td class="m-scope">Interior and exterior finishing packages delivered to a fixed scope and schedule.</td>
-          <td><span class="m-sector land">Land</span></td>
+          <td class="m-service" data-label="Service">Fit-out &amp; finishing</td>
+          <td class="m-scope" data-label="Scope">Interior and exterior finishing packages delivered to a fixed scope and schedule.</td>
+          <td class="m-sector-cell"><span class="m-sector land">Land</span></td>
         </tr>
         <tr>
-          <td class="m-service">Supply &amp; procurement</td>
-          <td class="m-scope">Sourcing and delivery of construction materials and equipment for land and marine sites alike.</td>
-          <td><span class="m-sector cross">Cross-sector</span></td>
+          <td class="m-service" data-label="Service">Supply &amp; procurement</td>
+          <td class="m-scope" data-label="Scope">Sourcing and delivery of construction materials and equipment for land and marine sites alike.</td>
+          <td class="m-sector-cell"><span class="m-sector cross">Cross-sector</span></td>
         </tr>
         <tr>
-          <td class="m-service">Maintenance &amp; facility support</td>
-          <td class="m-scope">Ongoing upkeep contracts covering structures, marine assets and site facilities.</td>
-          <td><span class="m-sector cross">Cross-sector</span></td>
+          <td class="m-service" data-label="Service">Maintenance &amp; facility support</td>
+          <td class="m-scope" data-label="Scope">Ongoing upkeep contracts covering structures, marine assets and site facilities.</td>
+          <td class="m-sector-cell"><span class="m-sector cross">Cross-sector</span></td>
         </tr>
       </tbody>
     </table>
@@ -531,7 +557,7 @@
     <div class="section-head">
       <div class="kicker">Recent work</div>
       <h2>Along the coastline and inland</h2>
-      <p>A sample of the terrain Farous builds on — from waterside piers to residential developments.</p>
+      <p>A for our project click here.</p>
     </div>
     <div class="portfolio-links">
       <a href="https://farous123.github.io/portfolio.farous/" id="portfolioMarine" class="btn btn-gold" target="_blank" rel="noopener">PORTFOLIO — MARINE</a>
